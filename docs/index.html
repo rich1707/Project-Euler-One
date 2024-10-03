@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Richard Ryan">
+<meta name="dcterms.date" content="2024-10-01">
+
+<title>Project Euler - Problems 1 to 10</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#problem-1-multiples-of-3-or-5" id="toc-problem-1-multiples-of-3-or-5" class="nav-link" data-scroll-target="#problem-1-multiples-of-3-or-5">Problem 1: Multiples of 3 or 5</a></li>
+  <li><a href="#problem-2-even-fibonacci-numbers" id="toc-problem-2-even-fibonacci-numbers" class="nav-link" data-scroll-target="#problem-2-even-fibonacci-numbers">Problem 2: Even Fibonacci numbers</a></li>
+  <li><a href="#problem-3-largest-prime-factor" id="toc-problem-3-largest-prime-factor" class="nav-link" data-scroll-target="#problem-3-largest-prime-factor">Problem 3: Largest prime factor</a></li>
+  <li><a href="#problem-4-largest-palindrome-product" id="toc-problem-4-largest-palindrome-product" class="nav-link" data-scroll-target="#problem-4-largest-palindrome-product">Problem 4: Largest palindrome product</a></li>
+  <li><a href="#problem-5-smallest-multiple" id="toc-problem-5-smallest-multiple" class="nav-link" data-scroll-target="#problem-5-smallest-multiple">Problem 5: Smallest multiple</a></li>
+  <li><a href="#problem-6-sum-square-difference" id="toc-problem-6-sum-square-difference" class="nav-link" data-scroll-target="#problem-6-sum-square-difference">Problem 6: Sum square difference</a></li>
+  <li><a href="#problem-7-the-10001st-prime" id="toc-problem-7-the-10001st-prime" class="nav-link" data-scroll-target="#problem-7-the-10001st-prime">Problem 7: the 10001st prime</a></li>
+  <li><a href="#problem-8-largest-product-in-a-series" id="toc-problem-8-largest-product-in-a-series" class="nav-link" data-scroll-target="#problem-8-largest-product-in-a-series">Problem 8: Largest product in a series</a></li>
+  <li><a href="#problem-9-special-pythagorean-triplet" id="toc-problem-9-special-pythagorean-triplet" class="nav-link" data-scroll-target="#problem-9-special-pythagorean-triplet">Problem 9: Special Pythagorean triplet</a></li>
+  <li><a href="#problem-10-summation-of-primes" id="toc-problem-10-summation-of-primes" class="nav-link" data-scroll-target="#problem-10-summation-of-primes">Problem 10: Summation of primes</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Project Euler - Problems 1 to 10</h1>
+<p class="subtitle lead">Solving the first ten problems in Project Euler using base R and {numbers}</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Richard Ryan </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 1, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>The following are solutions to some of the simpler and more accessible problems from the <a href="http://projecteuler.net/">Project Euler website</a>.</p>
+<p>Using <code>R</code> to solve these problems is a particularly interesting exercise, as it involves packages outside the data science mainstream, and requires techniques not often used when analysing data. For example, a <code>while()</code> loop is almost never needed in data science, but in solving mathematical problems it is, as we shall see, commonplace.</p>
+<p>We shall at all times attempt to solve these problems in the most computationally efficient way, though no doubt many of our solutions will fall some way short of the ideal.</p>
+<p>As always, we start by loading the packages we shall need:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="problem-1-multiples-of-3-or-5" class="level1">
+<h1>Problem 1: Multiples of 3 or 5</h1>
+<p><strong>The Problem:</strong></p>
+<p><em>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.</em></p>
+<p><em>Find the sum of all the multiples of 3 or 5 below 1000.</em></p>
+<p><strong>The Solution:</strong></p>
+<p>This is the <a href="http://projecteuler.net/problem=1">first problem</a> on the Project Euler Website. It isn’t a difficult problem to solve in any programming language, but the vectorised nature of <code>R</code> makes the solution particularly concise.</p>
+<p>First we create of a vector of integers from 1 to 999. We then filter for numbers divisible by either 3 or 5 and pass the new vector to the <code>sum()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">999</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>numbers[numbers <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span> numbers <span class="sc">%%</span> <span class="dv">5</span> <span class="sc">==</span> <span class="dv">0</span>] <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 233168</code></pre>
+</div>
+</div>
+</section>
+<section id="problem-2-even-fibonacci-numbers" class="level1">
+<h1>Problem 2: Even Fibonacci numbers</h1>
+<p><strong>The Problem:</strong></p>
+<p><em>Each new term in the Fibonacci sequence is generated by adding the previous two terms. By starting with 1 and 2, the first 10 terms will be:</em></p>
+<pre><code>     1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...</code></pre>
+<p><em>By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.</em></p>
+<p><strong>The solution:</strong></p>
+<p>This is the <a href="http://projecteuler.net/problem=2">second problem</a> on the Project Euler website.</p>
+<p>Here we need a <code>while()</code> loop to limit the last term of the fibonacci sequence to 4 million or less. We start the index at 1 and generate the sequence, testing the last term to see whether it exceeds 4 million. If it is less than 4 million, then we increase the index by 1 and repeat the process.</p>
+<p>When the last time in the sequence is greater than 4 million, we simply filter the vector to exclude any superfluous terms, filter it again to obtain the even numbers, and finally pass this new vector to the <code>sum()</code> function.</p>
+<p>It’s not difficult to write our own function to calculate the Fibonacci sequence, but we can save a bit of time by calling on the <code>fibonacci()</code> function from the <code>{numbers}</code> package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fib_last_term <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (fib_last_term <span class="sc">&lt;=</span> <span class="fl">4e6</span>) {</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>   fib_sequence <span class="ot">&lt;-</span> <span class="fu">fibonacci</span>(index, <span class="at">sequence =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>   fib_last_term <span class="ot">&lt;-</span> fib_sequence[index]</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>   index <span class="ot">&lt;-</span> index <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>fib_sequence <span class="ot">&lt;-</span> fib_sequence[fib_sequence <span class="sc">&lt;=</span> <span class="fl">4e6</span>]</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>fib_sequence[fib_sequence <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>] <span class="sc">|&gt;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>   <span class="fu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4613732</code></pre>
+</div>
+</div>
+</section>
+<section id="problem-3-largest-prime-factor" class="level1">
+<h1>Problem 3: Largest prime factor</h1>
+<p><strong>The problem:</strong></p>
+<p><em>The prime factors of 13195 are 5, 7, 13 and 29.</em></p>
+<p><em>What is the largest prime factor of the number 600,851,475,143?</em></p>
+<p><strong>The solution:</strong></p>
+<p>This is the <a href="http://projecteuler.net/problem=3">third problem</a> of Project Euler.</p>
+<p>We have the option here of writing a function to implement the Sieve of Eratosthenes. However, it is much simpler to use the <code>primeFactors()</code> function from the <code>{numbers}</code> package, which, together with the pipe <code>|&gt;</code> function, enables us to solve this problem in a very few lines of code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>max_prime_factor <span class="ot">&lt;-</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">gsub</span>(<span class="st">","</span>, <span class="st">""</span>, <span class="st">"600,851,475,143"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">as.numeric</span>() <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">primeFactors</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">max</span>() </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>max_prime_factor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6857</code></pre>
+</div>
+</div>
+</section>
+<section id="problem-4-largest-palindrome-product" class="level1">
+<h1>Problem 4: Largest palindrome product</h1>
+<p><strong>The problem</strong></p>
+<p><em>A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.</em></p>
+<p><em>Find the largest palindrome made from the product of two 3-digit numbers.</em></p>
+<p><strong>The solution:</strong></p>
+<p>This is the <a href="http://projecteuler.net/problem=4">fourth problem</a> of Project Euler.</p>
+<p>This is another fairly simple problem. We start by creating two vectors of all possible three digit numbers. We use the <code>outer()</code> function to calculate the outer-product before converting to a vector and arranging in decreasing order. Our task is then to find the first palindrome in the vector we have just calculated.</p>
+<p>We do this with a <code>for()</code> loop. Each number is converted to a string and stored as a character variable <code>word</code>. We then create a second character variable, <code>word_reversed</code>, which is made by reversing the characters of the string stored in <code>word</code>. When <code>word == word_reversed</code> we have found our answer.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>num_vec_one <span class="ot">&lt;-</span> <span class="dv">100</span><span class="sc">:</span><span class="dv">999</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>num_vec_two <span class="ot">&lt;-</span> <span class="dv">100</span><span class="sc">:</span><span class="dv">999</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>number_vector <span class="ot">&lt;-</span> <span class="fu">outer</span>(num_vec_one, num_vec_two) <span class="sc">|&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">as.vector</span>() <span class="sc">|&gt;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">sort</span>(<span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> number_vector) {</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>   word <span class="ot">&lt;-</span> <span class="fu">as.character</span>(i)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>   word_reversed <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(word, <span class="st">""</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">unlist</span>() <span class="sc">|&gt;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rev</span>() <span class="sc">|&gt;</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste</span>(<span class="at">collapse =</span> <span class="st">""</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>   <span class="cf">if</span> (word <span class="sc">==</span> word_reversed) <span class="cf">break</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(word)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 906609</code></pre>
+</div>
+</div>
+</section>
+<section id="problem-5-smallest-multiple" class="level1">
+<h1>Problem 5: Smallest multiple</h1>
+<p><strong>The problem:</strong></p>
+<p><em>2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.</em></p>
+<p><em>What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?</em></p>
+<p><strong>The solution:</strong></p>
+<p>This is the <a href="http://projecteuler.net/problem=5">fifth problem</a> of Project Euler.</p>
+<p>It is obvious that the solution is some multiple of 2520. Therefore we need a <code>while()</code> loop that starts at 2520 and increases by 2520 on each iteration. We test whether all numbers from 1 to 20 divide evenly into the number in question; when we find a number for which this holds we have our solution.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>candidate <span class="ot">&lt;-</span> <span class="dv">2520</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>remainder <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (remainder <span class="sc">!=</span> <span class="dv">0</span>) {</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>   rem_vec <span class="ot">&lt;-</span> candidate <span class="sc">%%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>   remainder <span class="ot">&lt;-</span> <span class="fu">sum</span>(rem_vec)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>   candidate <span class="ot">&lt;-</span> candidate <span class="sc">+</span> <span class="dv">2520</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>solution <span class="ot">&lt;-</span> candidate <span class="sc">-</span> <span class="dv">2520</span>; solution</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 232792560</code></pre>
+</div>
+</div>
+</section>
+<section id="problem-6-sum-square-difference" class="level1">
+<h1>Problem 6: Sum square difference</h1>
+<p><strong>The problem:</strong></p>
+<p><em>The sum of the squares of the first ten natural numbers is,</em> <span class="math display">\[1^2 + 2^2 + \ldots + 10^2 = 385\]</span></p>
+<p><em>The square of the sum of the first ten natural numbers is,</em> <span class="math display">\[(1 + 2 + \ldots + 10)^2 = 552 = 3025\]</span></p>
+<p><em>Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is</em> <span class="math inline">\(3025−385=2640.\)</span></p>
+<p><em>Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.</em></p>
+<p><strong>The solution:</strong></p>
+<p>This is the <a href="http://projecteuler.net/problem=6">sixth problem</a> of Project Euler.</p>
+<p>This is another very simple problem given that the functions we need are vectorised. First we sum all the numbers from 1 to 100 and square the result. Second we square the numbers from 1 to 100 and we sum the result. We then take the second number from the first.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>first_number <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">**</span><span class="dv">2</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>second_number <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">**</span><span class="dv">2</span> <span class="sc">|&gt;</span> <span class="fu">sum</span>()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>first_number <span class="sc">-</span> second_number</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25164150</code></pre>
+</div>
+</div>
+</section>
+<section id="problem-7-the-10001st-prime" class="level1">
+<h1>Problem 7: the 10001st prime</h1>
+<p><strong>The problem:</strong></p>
+<p><em>By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.</em></p>
+<p><em>What is the 10,001st prime number?</em></p>
+<p><strong>The solution</strong></p>
+<p>This is the <a href="http://projecteuler.net/problem=7">seventh problem</a> of Project Euler.</p>
+<p>The following is certainly the simplest way to solve this problem. We use a <code>while()</code> loop to iterate through the integers, testing each one with the <code>isPrime()</code> function from the <code>{numbers}</code> package. If the number is prime, then we add 1 to the prime count. We break when the total number of primes reaches 10,001. The mechanics of the <code>while()</code> loop mean that the <code>index_number</code> count will have been advanced automatically; therefore deducting 1 will give us the correct answer.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>index_number <span class="ot">&lt;-</span> <span class="dv">1</span>  </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>prime_count <span class="ot">&lt;-</span> <span class="dv">1</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (prime_count <span class="sc">&lt;=</span> <span class="dv">10001</span>) {</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>   <span class="cf">if</span> (<span class="fu">isPrime</span>(index_number)) {</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>      prime_count <span class="ot">&lt;-</span> prime_count <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>      index_number <span class="ot">&lt;-</span> index_number <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>   } <span class="cf">else</span> {</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>      index_number <span class="ot">&lt;-</span> index_number <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>   } </span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>index_number <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 104743</code></pre>
+</div>
+</div>
+</section>
+<section id="problem-8-largest-product-in-a-series" class="level1">
+<h1>Problem 8: Largest product in a series</h1>
+<p><strong>The problem:</strong></p>
+<p><em>The four adjacent digits in the 1000-digit number that have the greatest product are 9 × 9 × 8 × 9 = 5832.</em></p>
+<p>“73167176531330624919225119674426574742355349194934 96983520312774506326239578318016984801869478851843 85861560789112949495459501737958331952853208805511 12540698747158523863050715693290963295227443043557 66896648950445244523161731856403098711121722383113 62229893423380308135336276614282806444486645238749 30358907296290491560440772390713810515859307960866 70172427121883998797908792274921901699720888093776 65727333001053367881220235421809751254540594752243 52584907711670556013604839586446706324415722155397 53697817977846174064955149290862569321978468622482 83972241375657056057490261407972968652414535100474 82166370484403199890008895243450658541227588666881 16427171479924442928230863465674813919123162824586 17866458359124566529476545682848912883142607690042 24219022671055626321111109370544217506941658960408 07198403850962455444362981230987879927244284909188 84580156166097919133875499200524063689912560717606 05886116467109405077541002256983155200055935729725 71636269561882670428252483600823257530420752963450”</p>
+<p><em>Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?</em></p>
+<p><strong>The solution</strong></p>
+<p>This is the <a href="http://projecteuler.net/problem=8">eighth problem</a> of Project Euler.</p>
+<p>First we read in the above number as a string. We then iterate over it, using <code>substr()</code> to obtain every possible 13 digit sequence. For each sequence, we split it into its separate digits, convert it to a numeric and calculate the product. We test this product against the previously highest product and replace one for the other when required.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>digits_1k <span class="ot">&lt;-</span> <span class="st">"7316717653133062491922511967442657474235534919493496983520312774506326239578318016984801869478851843858615607891129494954595017379583319528532088055111254069874715852386305071569329096329522744304355766896648950445244523161731856403098711121722383113622298934233803081353362766142828064444866452387493035890729629049156044077239071381051585930796086670172427121883998797908792274921901699720888093776657273330010533678812202354218097512545405947522435258490771167055601360483958644670632441572215539753697817977846106495514929086256932197846862248283972241375657056057490261407972968652414535100474821663704844031998900089524345065854122758866688116427171479924442928230863465674813919123162824586178664583591245665294765456828489128831426076900422421902267105562632111110937054421750694165896040807198403850962455444362981230987879927244284909188845801561660979191338754992005240636899125607176060588611646710940507754100225698315520005593572972571636269561882670428252483600823257530420752963450"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>step_size <span class="ot">&lt;-</span> <span class="dv">12</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>highest_product <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span> <span class="fu">nchar</span>(digits_1k)) {</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>   start_point <span class="ot">&lt;-</span> i</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>   prod_string <span class="ot">&lt;-</span> <span class="fu">substr</span>(digits_1k, start_point, start_point <span class="sc">+</span> step_size)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>   prod_numeric <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(prod_string, <span class="st">""</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">unlist</span>() <span class="sc">|&gt;</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.numeric</span>() <span class="sc">|&gt;</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">prod</span>()</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>   <span class="cf">if</span> (prod_numeric <span class="sc">&gt;</span> highest_product) {</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>      highest_product <span class="ot">&lt;-</span> prod_numeric</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>   }</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>highest_product</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 23514624000</code></pre>
+</div>
+</div>
+</section>
+<section id="problem-9-special-pythagorean-triplet" class="level1">
+<h1>Problem 9: Special Pythagorean triplet</h1>
+<p><strong>The problem:</strong></p>
+<p><em>A Pythagorean triplet is a set of three natural numbers, a &lt; b &lt; c, for which,</em> <span class="math display">\[a^2 + b^2 = c^2\]</span></p>
+<p><em>For example,</em> <span class="math inline">\(32 + 42 = 9 + 16 = 25 = 52\)</span>.</p>
+<p><em>There exists exactly one Pythagorean triplet for which</em> <span class="math inline">\(a + b + c = 1000\)</span>.</p>
+<p><em>Find the product</em> <span class="math inline">\(abc\)</span>.</p>
+<p><strong>The Solution:</strong></p>
+<p>This is the <a href="http://projecteuler.net/problem=9">nineth problem</a> of Project Euler.</p>
+<p>We start by constructing two vectors <code>poss_a</code> and <code>poss_b</code>. As we are told that <span class="math display">\[ a &lt; b &lt; c\]</span> we know that <span class="math inline">\(a\)</span> must be less than or equal to <code>floor(1000 / 3)</code> and <span class="math inline">\(b\)</span> must be less than or equal to <code>floor(1000 /2)</code>. Obviously <span class="math display">\[c = 1000 - a - b\]</span></p>
+<p>We then use a nested <code>for()</code> loop to iterate through each of the <code>poss_a</code> and <code>poss_b</code> sequences. On each iteration we test whether <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span> are a Pythagorean triple. Once we have found a solution we can <code>break</code> and exit the loop.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>poss_a <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span> <span class="fu">floor</span>(<span class="dv">1000</span> <span class="sc">/</span> <span class="dv">3</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>poss_b <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span> <span class="fu">floor</span>(<span class="dv">1000</span> <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>found_solution <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(poss_a)) {</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>   <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">seq_along</span>(poss_b)) {</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>      k <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="sc">-</span> i <span class="sc">-</span> j</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (i<span class="sc">**</span><span class="dv">2</span> <span class="sc">+</span> j<span class="sc">**</span><span class="dv">2</span> <span class="sc">==</span> k<span class="sc">**</span><span class="dv">2</span>) {</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>         a <span class="ot">&lt;-</span> i</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>         b <span class="ot">&lt;-</span> j</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>         c <span class="ot">&lt;-</span> k</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>         found_solution <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>         <span class="cf">break</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>   }</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>   <span class="cf">if</span> (found_solution <span class="sc">==</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>      <span class="cf">break</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>   }</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="fu">prod</span>(a, b, c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 31875000</code></pre>
+</div>
+</div>
+</section>
+<section id="problem-10-summation-of-primes" class="level1">
+<h1>Problem 10: Summation of primes</h1>
+<p><strong>The problem:</strong></p>
+<p><em>The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.</em></p>
+<p><em>Find the sum of all the primes below two million.</em></p>
+<p><strong>The solution</strong></p>
+<p>This is the <a href="http://projecteuler.net/problem=10">tenth problem</a> of Project Euler.</p>
+<p>This is quite an easy problem. We use the <code>atkin_sieve()</code> function from the <code>{numbers}</code> package to build a vector of primes less than two million. Then we <code>sum()</code> the resultant vector.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">atkin_sieve</span>(<span class="fl">2e6</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 142913828922</code></pre>
+</div>
+</div>
+<p>The first ten problems are now complete. All of the questions above are fairly simple, but it was nonetheless a worthwhile exercise as it provided experience in using <code>R</code> as a programming language outside the norm of data science.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
