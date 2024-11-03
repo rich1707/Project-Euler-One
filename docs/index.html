@@ -9,7 +9,7 @@
 <meta name="author" content="Richard Ryan">
 <meta name="dcterms.date" content="2024-10-01">
 
-<title>Project Euler - Problems 1 to 10</title>
+<title>Problems from Project Euler</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -128,8 +128,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Project Euler - Problems 1 to 10</h1>
-<p class="subtitle lead">Solving the first ten problems in Project Euler using base R and {numbers}</p>
+<h1 class="title">Problems from Project Euler</h1>
+<p class="subtitle lead">Solving the first ten problems on Project Euler using Base R</p>
 </div>
 
 
@@ -174,7 +174,8 @@ window.Quarto = {
 <p><em>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.</em></p>
 <p><em>Find the sum of all the multiples of 3 or 5 below 1000.</em></p>
 <p><strong>The Solution:</strong></p>
-<p>This is the <a href="http://projecteuler.net/problem=1">first problem</a> on the Project Euler Website. It isn’t a difficult problem to solve in any programming language, but the vectorised nature of <code>R</code> makes the solution particularly concise.</p>
+<p>This is the <a href="http://projecteuler.net/problem=1">first problem</a> on the Project Euler Website.</p>
+<p>It isn’t a difficult problem to solve in any programming language, but the vectorised nature of <code>R</code> makes the solution particularly concise.</p>
 <p>First we create of a vector of integers from 1 to 999. We then filter for numbers divisible by either 3 or 5 and pass the new vector to the <code>sum()</code> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">999</span></span>

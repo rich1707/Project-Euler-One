@@ -1,11 +1,13 @@
 ---
-title: "Project Euler - Problems 1 to 10"
-subtitle: "Solving the first ten problems in Project Euler using base R and {numbers}"
+title: "Problems from Project Euler"
+subtitle: "Solving the first ten problems on Project Euler using Base R"
 author: "Richard Ryan"
 date: "1 October 2024"
 format: html
 editor: visual
-theme: cyborg
+theme: 
+   - cyborg
+   - custom.scss
 execute: 
   message: false
   warning: false
@@ -37,7 +39,9 @@ library(numbers)
 
 **The Solution:**
 
-This is the [first problem](http://projecteuler.net/problem=1) on the Project Euler Website. It isn't a difficult problem to solve in any programming language, but the vectorised nature of `R` makes the solution particularly concise.
+This is the [first problem](http://projecteuler.net/problem=1) on the Project Euler Website.
+
+It isn't a difficult problem to solve in any programming language, but the vectorised nature of `R` makes the solution particularly concise.
 
 First we create of a vector of integers from 1 to 999. We then filter for numbers divisible by either 3 or 5 and pass the new vector to the `sum()` function.
 
